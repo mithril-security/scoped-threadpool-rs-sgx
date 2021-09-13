@@ -53,6 +53,9 @@ extern crate lazy_static;
 
 use std::thread::{self, JoinHandle};
 use std::sync::mpsc::{channel, Sender, Receiver, SyncSender, sync_channel, RecvError};
+#[cfg(any(target_env = "sgx"))]
+use std::sync::{Arc, SgxMutex as Mutex};
+#[cfg(not(target_env = "sgx"))]
 use std::sync::{Arc, Mutex};
 use std::marker::PhantomData;
 use std::mem;
